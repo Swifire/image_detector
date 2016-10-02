@@ -62,5 +62,34 @@
     <Image Include="images\winter_3.jpg">
       <Filter>Файлы ресурсов</Filter>
     </Image>
+    <Image Include="images\autumn_test_1.jpg">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="images\autumn_test_2.jpg">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="images\autumn_test_3.jpg">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="images\spring_test.jpg">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="images\summer_test.jpg">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="images\winter_test.jpg">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="bitmap_image.hpp">
+      <Filter>Заголовочные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Заголовочные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Заголовочные файлы</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -52,6 +52,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <OpenMPSupport>true</OpenMPSupport>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -89,15 +90,26 @@
     <Image Include="images\autumn_1.jpg" />
     <Image Include="images\autumn_2.jpg" />
     <Image Include="images\autumn_3.jpg" />
+    <Image Include="images\autumn_test_1.jpg" />
+    <Image Include="images\autumn_test_2.jpg" />
+    <Image Include="images\autumn_test_3.jpg" />
     <Image Include="images\spring_1.jpg" />
     <Image Include="images\spring_2.jpg" />
     <Image Include="images\spring_3.jpg" />
+    <Image Include="images\spring_test.jpg" />
     <Image Include="images\summer_1.jpg" />
     <Image Include="images\summer_2.jpg" />
     <Image Include="images\summer_3.jpg" />
+    <Image Include="images\summer_test.jpg" />
     <Image Include="images\winter_1.jpg" />
     <Image Include="images\winter_2.jpg" />
     <Image Include="images\winter_3.jpg" />
+    <Image Include="images\winter_test.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="bitmap_image.hpp" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="targetver.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

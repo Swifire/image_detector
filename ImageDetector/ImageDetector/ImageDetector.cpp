@@ -1,12 +1,13 @@
 #include "stdafx.h"
-
-#include "bitmap_image.hpp"
+#include "picture.h"
 
 using namespace std;
 
 int main(void)
 {
-	cout << "Project is started!" << endl;
+	Picture picture1("images/autumn_1.bmp");
+	picture1.loadPicture();
+	picture1.savePicture("autumn");
 	return 0;
 }
 

@@ -6,7 +6,26 @@ Picture::Picture() {}
 
 Picture::Picture(string path) 
 {
+	initialize();
 	parsePath(path);
+	setSeason();
+	setResultPath();
+}
+
+void Picture::initialize()
+{
+	for (int i = 0; i < 3; i++)
+	{
+		_histogram[i].reserve(10);
+	}
+
+	for (int row = 0; row < 3; row++) 
+	{
+		for (int col = 0; col < 10; col++) 
+		{
+			_histogram[row].push_back(0);
+		}
+	}
 }
 
 void Picture::parsePath(string path)
@@ -19,14 +38,15 @@ void Picture::parsePath(string path)
 
 	_fullPath = path;
 
-	while ((next = path.find(delim, prev)) != string::npos){
+	while ((next = path.find(delim, prev)) != string::npos)
+	{
 		arrPath.push_back(path.substr(prev, next - prev));
 		prev = next + delta;
 	}
 
 	for (int i = 0; i < arrPath.size(); i++)
 	{
-		_path = arrPath.at(i) + "/";
+		_path += arrPath.at(i) + "/";
 	}
 
 	delim = ".";
@@ -48,12 +68,69 @@ void Picture::loadPicture()
 	unsigned int h = image.height();
 
 	image.region(0, 0, w, h, _image);
+
+	normalizeHistogram();
 }
 
 void Picture::savePicture(string season)
 {
-	string newPath = _path + _name + "_" + season + "." + _extension;
+	setSeason(season);
+	string newPath = _resultPath + _name + "_" + _season + "." + _extension;
 	_image.save_image(newPath);
+}
+
+int* getScope()
+{
+	int maxColors = 255;
+	int intervals = 10;
+	int step = maxColors / intervals;
+	int* arrScope = new int[10];
+
+	for (int i = 0; i < 10; i++)
+	{
+		arrScope[i] = i * step;
+	}
+
+	return arrScope;
+}
+
+void Picture::fillHistogram(unsigned char color, int iter, int& arrScope)
+{
+	int* arrMyScope = &arrScope;
+
+	for (int i = 9; i >= 0; i--)
+	{
+		if (color >= arrMyScope[i])
+		{
+			_histogram[iter][i]++;
+			break;
+		}
+	}
+}
+
+void Picture::createHistogram()
+{
+	const unsigned int width = _image.width();
+	const unsigned int height = _image.height();
+	unsigned char red, green, blue;
+
+	int* arrScope = getScope();
+
+	for (size_t y = 0; y < height; ++y)
+	{
+		for (size_t x = 0; x < width; ++x)
+		{
+			_image.get_pixel(x, y, red, green, blue);
+			fillHistogram(red, 0, *arrScope);
+			fillHistogram(green, 1, *arrScope);
+			fillHistogram(blue, 2, *arrScope);
+		}
+	}
+}
+
+void Picture::normalizeHistogram()
+{
+	createHistogram();
 }
 
 Picture::~Picture() {}

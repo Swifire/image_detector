@@ -10,9 +10,14 @@ public:
 	Picture(string path);
 	virtual ~Picture();
 
+	void initialize();
+
+	void parsePath(string path);
 	void loadPicture();
 	void savePicture(string season);
-	void parsePath(string path);
+	void createHistogram();
+	void fillHistogram(unsigned char color, int iter, int &arrScope);
+	void normalizeHistogram();
 
 	void setName(string name) { _name = name; }
 	string getName() { return _name; }
@@ -23,19 +28,28 @@ public:
 	void setFullPath(string fullPath) { _fullPath = fullPath; }
 	string getFullPath() { return _fullPath; }
 
+	void setResultPath(string resultPath = "results/") { _resultPath = resultPath; }
+	string getResultPath() { return _resultPath; }
+
 	void setExtension(string extension) { _extension = extension; }
 	string getExtension() { return _extension; }
 
-	vector<int>* getRGB() { return _rgb; }
+	void setSeason(string season = "none") { _season = season; }
+	string getSeason() { return _season; }
+
+	vector<int>* getHistogram() { return _histogram; }
 
 private:
 	string _name;
 	string _extension;
 	string _path;
 	string _fullPath;
+	string _resultPath;
+
+	string _season;
 
 	bitmap_image _image;
 
-	vector<int> _rgb[3];
+	vector<int> _histogram[3];
 };
 

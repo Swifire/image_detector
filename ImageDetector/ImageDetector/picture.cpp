@@ -79,12 +79,12 @@ void Picture::savePicture(string season)
 	_image.save_image(newPath);
 }
 
-int* getScope()
+float* getScope()
 {
 	int maxColors = 255;
 	int intervals = 10;
 	int step = maxColors / intervals;
-	int* arrScope = new int[10];
+	float* arrScope = new float[10];
 
 	for (int i = 0; i < 10; i++)
 	{
@@ -94,9 +94,9 @@ int* getScope()
 	return arrScope;
 }
 
-void Picture::fillHistogram(unsigned char color, int iter, int& arrScope)
+void Picture::fillHistogram(unsigned char color, int iter, float& arrScope)
 {
-	int* arrMyScope = &arrScope;
+	float* arrMyScope = &arrScope;
 
 	for (int i = 9; i >= 0; i--)
 	{
@@ -114,7 +114,7 @@ void Picture::createHistogram()
 	const unsigned int height = _image.height();
 	unsigned char red, green, blue;
 
-	int* arrScope = getScope();
+	float* arrScope = getScope();
 
 	for (size_t y = 0; y < height; ++y)
 	{
@@ -131,6 +131,15 @@ void Picture::createHistogram()
 void Picture::normalizeHistogram()
 {
 	createHistogram();
+
+	for (int i = 0; i < 3; i++)
+	{
+		float max = *max_element(_histogram[i].begin(), _histogram[i].end());
+		for (int j = 0; j < 10; j++)
+		{
+			_histogram[i][j] = _histogram[i][j] / max;
+		}
+	}
 }
 
 Picture::~Picture() {}

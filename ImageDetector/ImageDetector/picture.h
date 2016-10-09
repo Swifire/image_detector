@@ -2,6 +2,7 @@
 
 #include "bitmap_image.hpp"
 #include <vector>
+#include <algorithm>
 
 class Picture
 {
@@ -16,7 +17,7 @@ public:
 	void loadPicture();
 	void savePicture(string season);
 	void createHistogram();
-	void fillHistogram(unsigned char color, int iter, int &arrScope);
+	void fillHistogram(unsigned char color, int iter, float &arrScope);
 	void normalizeHistogram();
 
 	void setName(string name) { _name = name; }
@@ -37,7 +38,7 @@ public:
 	void setSeason(string season = "none") { _season = season; }
 	string getSeason() { return _season; }
 
-	vector<int>* getHistogram() { return _histogram; }
+	vector<float>* getHistogram() { return _histogram; }
 
 private:
 	string _name;
@@ -50,6 +51,6 @@ private:
 
 	bitmap_image _image;
 
-	vector<int> _histogram[3];
+	vector<float> _histogram[3];
 };
 

@@ -1,3 +1,6 @@
+#ifndef _PICTURE_H_
+#define _PICTURE_H_
+
 #pragma once
 
 #include "bitmap_image.hpp"
@@ -19,6 +22,8 @@ public:
 	void createHistogram();
 	void fillHistogram(unsigned char color, int iter, float &arrScope);
 	void normalizeHistogram();
+
+	void Picture::print();
 
 	void setName(string name) { _name = name; }
 	string getName() { return _name; }
@@ -54,3 +59,4 @@ private:
 	vector<float> _histogram[3];
 };
 
+#endif // _PICTURE_H_

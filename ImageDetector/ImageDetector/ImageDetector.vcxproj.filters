@@ -27,6 +27,9 @@
     <ClCompile Include="picture.cpp">
       <Filter>Файлы исходного кода</Filter>
     </ClCompile>
+    <ClCompile Include="checker.cpp">
+      <Filter>Файлы исходного кода</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="images\autumn_1.jpg">
@@ -95,6 +98,9 @@
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
     <ClInclude Include="picture.h">
+      <Filter>Заголовочные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="checker.h">
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
   </ItemGroup>

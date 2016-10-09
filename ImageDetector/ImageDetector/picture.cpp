@@ -142,4 +142,16 @@ void Picture::normalizeHistogram()
 	}
 }
 
+void Picture::print()
+{
+	for (int row = 0; row < 3; row++)
+	{
+		for (int col = 0; col < _histogram[row].size(); col++)
+		{
+			cout << _histogram[row][col] << "  ";
+		}
+		cout << "\n";
+	}
+}
+
 Picture::~Picture() {}

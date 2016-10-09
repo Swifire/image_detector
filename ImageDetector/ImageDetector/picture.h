@@ -19,6 +19,7 @@ public:
 	void parsePath(string path);
 	void loadPicture();
 	void savePicture(string season);
+	void savePicture();
 	void createHistogram();
 	void fillHistogram(unsigned char color, int iter, float &arrScope);
 	void normalizeHistogram();

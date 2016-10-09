@@ -79,6 +79,12 @@ void Picture::savePicture(string season)
 	_image.save_image(newPath);
 }
 
+void Picture::savePicture()
+{
+	string newPath = _resultPath + _name + "_" + _season + "." + _extension;
+	_image.save_image(newPath);
+}
+
 float* getScope()
 {
 	int maxColors = 255;

@@ -10,8 +10,6 @@ CheckerParallel::CheckerParallel()
 
 void CheckerParallel::initialize()
 {
-	//все переменные внутри, порядок не важен - параллелим
-	#pragma omp parallel for
 	for (int i = 0; i < 3; i++)
 	{
 		for (int row = 0; row < 4; row++)
@@ -63,8 +61,8 @@ void CheckerParallel::loadSeasonPictures()
 	};
 
 	string seasonName;
-	//все переменные внутри, порядок не важен - параллелим
-	#pragma omp parallel for
+	//seasonName приватный для каждого, порядок не важен - параллелим
+	#pragma omp parallel for private(seasonName)
 	for (int i = 0; i < 4; i++)
 	{
 		for (int j = i * 3; j < i * 3 + 3; j++)
@@ -123,7 +121,6 @@ void CheckerParallel::createAVGHistograms()
 		avg[i] = new vector<float>(10);
 	}
 
-	#pragma omp parallel for
 	for (int i = 0; i < 4; i++)
 	{
 		int iter = 0;
@@ -199,7 +196,7 @@ void CheckerParallel::checkPictures()
 
 	vector<float>* avg = new vector<float>(10);
 
-	#pragma omp parallel for
+	#pragma omp parallel for private(testSeasonName)
 	for (int i = 0; i < 4; i++)
 	{
 		avg = _testPictures[i]->getHistogram();

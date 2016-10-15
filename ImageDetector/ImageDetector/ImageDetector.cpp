@@ -7,7 +7,7 @@ using namespace std;
 
 int main(void)
 {
-	omp_set_num_threads(8);
+	omp_set_num_threads(2);
 	double start = GetTickCount();
 	CheckerParallel checker;
 	checker.loadAllPictures();

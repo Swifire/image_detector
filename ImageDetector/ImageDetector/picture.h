@@ -24,8 +24,6 @@ public:
 	void fillHistogram(unsigned char color, int iter, float &arrScope);
 	void normalizeHistogram();
 
-	void Picture::print();
-
 	void setName(string name) { _name = name; }
 	string getName() { return _name; }
 

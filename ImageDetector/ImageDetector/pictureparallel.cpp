@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "pictureparallel.h"
+#include "omp.h"
 
 
 PictureParallel::PictureParallel(){}
@@ -14,11 +15,13 @@ PictureParallel::PictureParallel(string path)
 
 void PictureParallel::initialize()
 {
+	#pragma omp parallel for
 	for (int i = 0; i < 3; i++)
 	{
 		_histogram[i].reserve(10);
 	}
 
+	#pragma omp parallel for
 	for (int row = 0; row < 3; row++)
 	{
 		for (int col = 0; col < 10; col++)
@@ -37,7 +40,6 @@ void PictureParallel::parsePath(string path)
 	size_t delta = delim.length();
 
 	_fullPath = path;
-
 	while ((next = path.find(delim, prev)) != string::npos)
 	{
 		arrPath.push_back(path.substr(prev, next - prev));
@@ -92,6 +94,7 @@ float* PictureParallel::getScope()
 	int step = maxColors / intervals;
 	float* arrScope = new float[10];
 
+	#pragma omp parallel for
 	for (int i = 0; i < 10; i++)
 	{
 		arrScope[i] = i * step;
@@ -137,7 +140,6 @@ void PictureParallel::createHistogram()
 void PictureParallel::normalizeHistogram()
 {
 	createHistogram();
-
 	for (int i = 0; i < 3; i++)
 	{
 		float max = *max_element(_histogram[i].begin(), _histogram[i].end());

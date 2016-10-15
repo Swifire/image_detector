@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "checkerparallel.h"
+#include "omp.h"
 
 
 CheckerParallel::CheckerParallel()
@@ -9,6 +10,8 @@ CheckerParallel::CheckerParallel()
 
 void CheckerParallel::initialize()
 {
+	//все переменные внутри, порядок не важен - параллелим
+	#pragma omp parallel for
 	for (int i = 0; i < 3; i++)
 	{
 		for (int row = 0; row < 4; row++)
@@ -60,7 +63,8 @@ void CheckerParallel::loadSeasonPictures()
 	};
 
 	string seasonName;
-
+	//все переменные внутри, порядок не важен - параллелим
+	#pragma omp parallel for
 	for (int i = 0; i < 4; i++)
 	{
 		for (int j = i * 3; j < i * 3 + 3; j++)
@@ -84,6 +88,8 @@ void CheckerParallel::loadTestPictures()
 		"images/winter_test_1.bmp"
 	};
 
+	//все переменные внутри, порядок не важен - параллелим
+	#pragma omp parallel for
 	for (int i = 0; i < 4; i++)
 	{
 		_testPictures[i] = new PictureParallel(pathTestPictures[i]);
@@ -99,6 +105,8 @@ void CheckerParallel::loadAllPictures()
 
 void CheckerParallel::saveTestPictures()
 {
+	//все переменные внутри, порядок не важен - параллелим
+	#pragma omp parallel for
 	for (int i = 0; i < 4; i++)
 	{
 		_testPictures[i]->savePicture();
@@ -108,12 +116,14 @@ void CheckerParallel::saveTestPictures()
 void CheckerParallel::createAVGHistograms()
 {
 	vector<float>* avg[3];
-
+	//все переменные внутри, порядок не важен - параллелим
+	#pragma omp parallel for
 	for (int i = 0; i < 3; i++)
 	{
 		avg[i] = new vector<float>(10);
 	}
 
+	#pragma omp parallel for
 	for (int i = 0; i < 4; i++)
 	{
 		int iter = 0;
@@ -139,6 +149,8 @@ int CheckerParallel::getMinIterator(float* results)
 	int minIterator = 0;
 	float min = results[0];
 
+	//все переменные внутри, порядок не важен - параллелим
+	#pragma omp parallel for
 	for (int i = 1; i < 4; i++)
 	{
 		if (results[i] < min)
@@ -157,6 +169,8 @@ string CheckerParallel::compareHistogram(vector<float>* histogram)
 	float value = 0.0;
 	float color = 0.0;
 
+	//все переменные внутри, порядок не важен - параллелим
+	#pragma omp parallel for
 	for (int col = 0; col < 4; col++)
 	{
 		color = 0.0;
@@ -184,6 +198,8 @@ void CheckerParallel::checkPictures()
 	string testSeasonName;
 
 	vector<float>* avg = new vector<float>(10);
+
+	#pragma omp parallel for
 	for (int i = 0; i < 4; i++)
 	{
 		avg = _testPictures[i]->getHistogram();

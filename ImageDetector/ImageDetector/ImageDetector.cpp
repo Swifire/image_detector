@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "checker.h"
+#include "checkerparallel.h"
 
 #include <windows.h>
 
@@ -7,9 +7,9 @@ using namespace std;
 
 int main(void)
 {
+	omp_set_num_threads(8);
 	double start = GetTickCount();
-
-	Checker checker;
+	CheckerParallel checker;
 	checker.loadAllPictures();
 	checker.checkPictures();
 

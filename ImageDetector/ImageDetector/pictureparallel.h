@@ -1,5 +1,5 @@
-#ifndef _PICTURE_H_
-#define _PICTURE_H_
+#ifndef _PICTUREPARALLEL_H_
+#define _PICTUREPARALLEL_H_
 
 #pragma once
 
@@ -7,12 +7,12 @@
 #include <vector>
 #include <algorithm>
 
-class Picture
+class PictureParallel
 {
 public:
-	Picture();
-	Picture(string path);
-	virtual ~Picture();
+	PictureParallel();
+	PictureParallel(string path);
+	virtual ~PictureParallel();
 
 	void initialize();
 
@@ -60,4 +60,4 @@ private:
 	vector<float> _histogram[3];
 };
 
-#endif // _PICTURE_H_
+#endif // _PICTUREPARALLEL_H_

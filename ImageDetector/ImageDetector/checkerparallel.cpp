@@ -1,13 +1,13 @@
 #include "stdafx.h"
-#include "checker.h"
+#include "checkerparallel.h"
 
 
-Checker::Checker()
+CheckerParallel::CheckerParallel()
 {
 	initialize();
 }
 
-void Checker::initialize()
+void CheckerParallel::initialize()
 {
 	for (int i = 0; i < 3; i++)
 	{
@@ -23,33 +23,33 @@ void Checker::initialize()
 	}
 }
 
-string Checker::getSeasonByNumber(int num)
+string CheckerParallel::getSeasonByNumber(int num)
 {
 	string seasonName;
 
 	switch (num)
 	{
-		case 0:
-			seasonName = "autumn";
-			break;
-		case 1:
-			seasonName = "spring";
-			break;
-		case 2:
-			seasonName = "summer";
-			break;
-		case 3:
-			seasonName = "winter";
-			break;
-		default:
-			seasonName = "None";
-			break;
+	case 0:
+		seasonName = "autumn";
+		break;
+	case 1:
+		seasonName = "spring";
+		break;
+	case 2:
+		seasonName = "summer";
+		break;
+	case 3:
+		seasonName = "winter";
+		break;
+	default:
+		seasonName = "None";
+		break;
 	}
 
 	return seasonName;
 }
 
-void Checker::loadSeasonPictures()
+void CheckerParallel::loadSeasonPictures()
 {
 	string pathSeasonPictures[12] =
 	{
@@ -65,7 +65,7 @@ void Checker::loadSeasonPictures()
 	{
 		for (int j = i * 3; j < i * 3 + 3; j++)
 		{
-			_seasonPictures[j] = new Picture(pathSeasonPictures[j]);
+			_seasonPictures[j] = new PictureParallel(pathSeasonPictures[j]);
 			_seasonPictures[j]->loadPicture();
 
 			seasonName = getSeasonByNumber(i);
@@ -74,7 +74,7 @@ void Checker::loadSeasonPictures()
 	}
 }
 
-void Checker::loadTestPictures()
+void CheckerParallel::loadTestPictures()
 {
 	string pathTestPictures[4] =
 	{
@@ -86,18 +86,18 @@ void Checker::loadTestPictures()
 
 	for (int i = 0; i < 4; i++)
 	{
-		_testPictures[i] = new Picture(pathTestPictures[i]);
+		_testPictures[i] = new PictureParallel(pathTestPictures[i]);
 		_testPictures[i]->loadPicture();
 	}
 }
 
-void Checker::loadAllPictures()
+void CheckerParallel::loadAllPictures()
 {
 	loadTestPictures();
 	loadSeasonPictures();
 }
 
-void Checker::saveTestPictures()
+void CheckerParallel::saveTestPictures()
 {
 	for (int i = 0; i < 4; i++)
 	{
@@ -105,7 +105,7 @@ void Checker::saveTestPictures()
 	}
 }
 
-void Checker::createAVGHistograms()
+void CheckerParallel::createAVGHistograms()
 {
 	vector<float>* avg[3];
 
@@ -131,10 +131,10 @@ void Checker::createAVGHistograms()
 				_avgHistogram[row][i][d3] = sum / 3;
 			}
 		}
-	}	
+	}
 }
 
-int Checker::getMinIterator(float* results)
+int CheckerParallel::getMinIterator(float* results)
 {
 	int minIterator = 0;
 	float min = results[0];
@@ -151,7 +151,7 @@ int Checker::getMinIterator(float* results)
 	return minIterator;
 }
 
-string Checker::compareHistogram(vector<float>* histogram)
+string CheckerParallel::compareHistogram(vector<float>* histogram)
 {
 	float results[4];
 	float value = 0.0;
@@ -177,7 +177,7 @@ string Checker::compareHistogram(vector<float>* histogram)
 	return getSeasonByNumber(minIterator);
 }
 
-void Checker::checkPictures()
+void CheckerParallel::checkPictures()
 {
 	createAVGHistograms();
 
@@ -194,4 +194,4 @@ void Checker::checkPictures()
 	saveTestPictures();
 }
 
-Checker::~Checker(){}
+CheckerParallel::~CheckerParallel(){}

@@ -1,13 +1,13 @@
 #pragma once
 
-#include "picture.h"
+#include "pictureparallel.h"
 #include <cmath>
 
-class Checker
+class CheckerParallel
 {
 public:
-	Checker();
-	virtual ~Checker();
+	CheckerParallel();
+	virtual ~CheckerParallel();
 
 	void initialize();
 
@@ -26,9 +26,8 @@ private:
 	void loadSeasonPictures();
 	void loadTestPictures();
 
-	Picture* _seasonPictures[12];
-	Picture* _testPictures[4];
+	PictureParallel* _seasonPictures[12];
+	PictureParallel* _testPictures[4];
 
 	vector<float> _avgHistogram[3][4];
 };
-

@@ -1,10 +1,10 @@
 #include "stdafx.h"
-#include "picture.h"
+#include "pictureparallel.h"
 
 
-Picture::Picture() {}
+PictureParallel::PictureParallel(){}
 
-Picture::Picture(string path) 
+PictureParallel::PictureParallel(string path)
 {
 	initialize();
 	parsePath(path);
@@ -12,23 +12,23 @@ Picture::Picture(string path)
 	setResultPath();
 }
 
-void Picture::initialize()
+void PictureParallel::initialize()
 {
 	for (int i = 0; i < 3; i++)
 	{
 		_histogram[i].reserve(10);
 	}
 
-	for (int row = 0; row < 3; row++) 
+	for (int row = 0; row < 3; row++)
 	{
-		for (int col = 0; col < 10; col++) 
+		for (int col = 0; col < 10; col++)
 		{
 			_histogram[row].push_back(0);
 		}
 	}
 }
 
-void Picture::parsePath(string path)
+void PictureParallel::parsePath(string path)
 {
 	vector<string> arrPath;
 	string delim("/");
@@ -60,7 +60,7 @@ void Picture::parsePath(string path)
 	_extension = path.substr(prev, next - prev);
 }
 
-void Picture::loadPicture()
+void PictureParallel::loadPicture()
 {
 	bitmap_image image(_fullPath);
 
@@ -72,20 +72,20 @@ void Picture::loadPicture()
 	normalizeHistogram();
 }
 
-void Picture::savePicture(string season)
+void PictureParallel::savePicture(string season)
 {
 	setSeason(season);
 	string newPath = _resultPath + _name + "_" + _season + "." + _extension;
 	_image.save_image(newPath);
 }
 
-void Picture::savePicture()
+void PictureParallel::savePicture()
 {
 	string newPath = _resultPath + _name + "_" + _season + "." + _extension;
 	_image.save_image(newPath);
 }
 
-float* Picture::getScope()
+float* PictureParallel::getScope()
 {
 	int maxColors = 255;
 	int intervals = 10;
@@ -100,7 +100,7 @@ float* Picture::getScope()
 	return arrScope;
 }
 
-void Picture::fillHistogram(unsigned char color, int iter, float& arrScope)
+void PictureParallel::fillHistogram(unsigned char color, int iter, float& arrScope)
 {
 	float* arrMyScope = &arrScope;
 
@@ -114,7 +114,7 @@ void Picture::fillHistogram(unsigned char color, int iter, float& arrScope)
 	}
 }
 
-void Picture::createHistogram()
+void PictureParallel::createHistogram()
 {
 	const unsigned int width = _image.width();
 	const unsigned int height = _image.height();
@@ -134,7 +134,7 @@ void Picture::createHistogram()
 	}
 }
 
-void Picture::normalizeHistogram()
+void PictureParallel::normalizeHistogram()
 {
 	createHistogram();
 
@@ -148,4 +148,4 @@ void Picture::normalizeHistogram()
 	}
 }
 
-Picture::~Picture() {}
+PictureParallel::~PictureParallel(){}
